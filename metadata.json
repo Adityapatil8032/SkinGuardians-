@@ -1,0 +1,5 @@
+{
+  "name": "SkinGuardians - Skin Analysis",
+  "description": "Educational skin condition analysis tool using AI.",
+  "requestFramePermissions": ["camera"]
+}
