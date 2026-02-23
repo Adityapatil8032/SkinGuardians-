@@ -15,9 +15,6 @@ import {
   RefreshCw
 } from 'lucide-react';
 
-// Initialize Gemini API
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-
 // Define the expected JSON structure
 interface AnalysisResult {
   disease_name: string;
@@ -129,6 +126,12 @@ export default function App() {
       // Extract base64 data and mime type
       const [header, data] = image.split(',');
       const mimeType = header.split(':')[1].split(';')[0];
+
+      const apiKey = process.env.GEMINI_API_KEY;
+      if (!apiKey) {
+        throw new Error('Gemini API key is missing. Please configure it in your environment.');
+      }
+      const ai = new GoogleGenAI({ apiKey });
 
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
